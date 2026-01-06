@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dr. Elsayed Abd Elhakim</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<script>
+    const MAX_VISIBLE = 5;
+    function addComment() {
+        const name = commentName.value.trim();
+        const text = commentText.value.trim();
+        const rate = commentRate.value;
+
+        if (!name || !text) return;
+
+        const stars = "⭐".repeat(rate);
+
+        const card = document.createElement("div");
+        card.className = "testimonial-card";
+        card.innerHTML = `
+            <h4>${name}</h4>
+            <p>${text}</p>
+            <span>${stars}</span>
+
+        `;
+
+        commentsContainer.prepend(card);
+
+        updateCommentsVisibility();
+
+        commentName.value = "";
+        commentText.value = "";
+    }
+
+    function updateCommentsVisibility() {
+        const comments = document.querySelectorAll(".testimonial-card");
+
+        comments.forEach((comment, index) => {
+            comment.style.display = index < MAX_VISIBLE ? "block" : "none";
+        });
+
+        document.getElementById("seeAllBtn").style.display =
+            comments.length > MAX_VISIBLE ? "block" : "none";
+    }
+
+    function showAllComments() {
+        document.querySelectorAll(".testimonial-card").forEach(c => {
+            c.style.display = "block";
+        });
+
+        document.getElementById("seeAllBtn").style.display = "none";
+    }
+</script>
+
+
+<body>
+
+    <section class="hero" id="home">
+        <img src="image/OIP.jpeg" alt="Doctor Image">
+        <h1>Dr. Elsayed Abd Elhakim</h1>
+        <button class="btn" onclick="document.getElementById('appointment').scrollIntoView({behavior: 'smooth'});"> Book Now </button>
+    </section>
+
+    <section class="about-section">
+        <p>
+            Doctor specialized in diagnosis and treatment with high experience,
+            providing professional medical care for patients.
+        </p>
+        <ul class="info-list">
+            <li> 12 Years Experience</li>
+            <li> Internal Medicine Specialist</li>
+            <li> Cairo University</li>
+            <li> Al-Mahalla Clinic</li>
+        </ul>
+    </section>
+
+    <section class="testimonials" id="testimonials">
+        <h1>Patient Testimonials</h1>
+        <p>Share your experience with us</p>
+        <div class="comment-form">
+            <input type="text" id="commentName" placeholder="Your Name">
+            <textarea id="commentText" placeholder="Write your comment"></textarea>
+            <select id="commentRate">
+                <option value="5">⭐⭐⭐⭐⭐</option>
+                <option value="4">⭐⭐⭐⭐</option>
+                <option value="3">⭐⭐⭐</option>
+                <option value="2">⭐⭐</option>
+                <option value="1">⭐</option>
+            </select>
+
+            <button class="btn" onclick="addComment()">Post Comment</button>
+        </div>
+        <div class="testimonials-container" id="commentsContainer"></div>
+        <button id="seeAllBtn" style="display:none" onclick="showAllComments()"> See all </button>
+    </section>
+
+    <a href="https://wa.me/201556442349"
+        class="whatsapp-float"
+        target="_blank"
+        aria-label="WhatsApp contact">
+        <i class="fa-brands fa-whatsapp"></i>
+    </a>
+
+    <section class="services-container" id="services">
+        <div class="service-card">
+            <i class="fa-solid fa-stethoscope fa-2x"></i>
+            <h3>General Disclosure</h3>
+            <p>A comprehensive examination for early diagnosis and holistic healthcare.</p>
+        </div>
+        <div class="service-card">
+            <i class="fa-solid fa-notes-medical fa-2x"></i>
+            <h3>Case follow-up</h3>
+            <p>Close monitoring of patient cases to ensure the best outcomes.</p>
+        </div>
+        <div class="service-card">
+            <i class="fa-solid fa-x-ray fa-2x"></i>
+            <h3>X-rays and tests.</h3>
+            <p>Comprehensive tests and scans to provide an accurate diagnosis.</p>
+        </div>
+        <div class="service-card">
+            <i class="fa-solid fa-pills fa-2x"></i>
+            <h3>Prescribing medications</h3>
+            <p>Prescribing medications safely and effectively according to the patient's condition.</p>
+        </div>
+    </section>
+
+    <section class="appointment-hero" id="appointment">
+        <h1>Book an Appointment</h1>
+        <p>Fill out the form below to schedule your visit.</p>
+    </section>
+
+    <section class="appointment-form-container">
+        <form class="appointment-form">
+            <input type="text" id="name" placeholder="Enter your full name" required>
+            <input type="tel" id="phone" placeholder="Enter your phone number" required>
+            <input type="date" id="date" required>
+            <input type="time" id="time" required>
+            <select id="service" required>
+                <option value="">-- Choose a service --</option>
+                <option value="general">General Checkup</option>
+                <option value="followup">Follow-up Care</option>
+                <option value="lab">Lab Tests & Imaging</option>
+                <option value="prescription">Prescription</option>
+            </select>
+            <button type="submit" class="btn">Book Now</button>
+        </form>
+    </section>
+
+    <section class="faq" id="faq">
+        <h1>Frequently Asked Questions</h1>
+        <div class="faq-item">
+            <h3>What are the clinic hours?</h3>
+            <p>We are open from 9:00 AM to 8:00 PM, Monday to Saturday.</p>
+        </div>
+        <div class="faq-item">
+            <h3>How can I book an appointment?</h3>
+            <p>You can book an appointment via our website or contact WhatsApp directly.</p>
+        </div>
+        <div class="faq-item">
+            <h3>Do you accept insurance?</h3>
+            <p>Yes, we accept most local insurance providers. Please check with the clinic.</p>
+        </div>
+        <div class="faq-item">
+            <h3>Where is the clinic located?</h3>
+            <p>Al-Mahalla Al-Kubra, Egypt.</p>
+        </div>
+    </section>
+
+    <section class="contact" id="contact">
+        <h1>Contact Us</h1>
+        <p>Get in touch with the clinic for appointments or inquiries.</p>
+        <div class="contact-details">
+            <p><i class="fa-solid fa-phone"></i> +20 155 644 2349</p>
+            <p><i class="fa-solid fa-envelope"></i> sdsr2205@gmail.com</p>
+            <p><i class="fa-solid fa-location-dot"></i> Al-Mahalla Al-Kubra, Egypt</p>
+        </div>
+        <div class="contact-map">
+            <iframe 
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d13709.57999102947!2d31.1666!3d30.9647!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14586f5f1f6e4d2d%3A0x123456789abcdef!2sAl-Mahalla%20Al-Kubra%2C%20Egypt!5e0!3m2!1sen!2s!4v1234567890" 
+                width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy"> </iframe>
+        </div>
+        <a href="https://wa.me/201556442349" class="whatsapp-float" target="_blank">
+            <i class="fa-brands fa-whatsapp"></i>
+        </a>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <h3>Dr. Elsayed Abd Elhakim</h3>
+            <p>Providing professional healthcare with care and dedication.</p>
+            <div class="footer-links">
+                    <a href="#home">Home</a>
+                    <a href="#testimonials">Testimonials</a>
+                    <a href="#services">Services</a>
+                    <a href="#appointment"> Book Appointment</a>
+                    <a href="#faq">FAQ</a>
+                    <a href="#contact">Contact</a>
+            </div>
+            <p>&copy; 2026 All Rights Reserved</p>
+        </div>
+    </footer>
+
+
+</body>
+</html>
